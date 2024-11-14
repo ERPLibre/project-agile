@@ -39,6 +39,7 @@
                         string="State"
                         widget="statusbar"
                         clickable="True"
+                        options="{'clickable': 1}"
                     />
                 </header>
                 <sheet string="Sprint">
