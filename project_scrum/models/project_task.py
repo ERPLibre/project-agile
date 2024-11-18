@@ -68,6 +68,9 @@ class ProjectTask(models.Model):
     sprint_id = fields.Many2one(
         comodel_name="project.scrum.sprint",
         string="Sprint",
+        compute="_compute_sprint_id",
+        readonly=False,
+        store=True,
     )
     us_id = fields.Many2one(
         comodel_name="project.scrum.us",
@@ -135,3 +138,12 @@ class ProjectTask(models.Model):
         if all(self.mapped("use_scrum")):
             return self.env.ref("project_scrum.view_ps_sprint_task_form2").id
         return super().get_formview_id(access_uid)
+
+    @api.depends("us_id")
+    def _compute_sprint_id(self):
+        for rec in self:
+            # Ignore when unassign User stories
+            if rec.us_id:
+                sprint_id = rec.us_id.sprint_ids[0] if rec.us_id.sprint_ids else None
+                if sprint_id:
+                    rec.sprint_id = sprint_id.id

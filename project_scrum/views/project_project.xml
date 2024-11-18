@@ -66,8 +66,6 @@
     <record id="edit_ps_project" model="ir.ui.view">
         <field name="name">project.scrum.project.form</field>
         <field name="model">project.project</field>
-        <field name="mode">primary</field>
-        <field name="priority">99</field>
         <field name="inherit_id" ref="project.edit_project" />
         <field name="arch" type="xml">
             <button name="attachment_tree_view" position="before">
@@ -76,6 +74,7 @@
                     type="action"
                     icon="fa-files-o"
                     name="%(action_ps_us_current)d"
+                    attrs="{'invisible':[('use_scrum', '=', False)]}"
                 >
                     <field name="user_story_count" widget="statinfo" />
                 </button>
@@ -84,6 +83,7 @@
                     type="action"
                     icon="fa-tasks"
                     name="%(action_ps_sprint_current)d"
+                    attrs="{'invisible':[('use_scrum', '=', False)]}"
                 >
                     <field name="sprint_count" widget="statinfo" />
                 </button>
@@ -92,6 +92,7 @@
                     type="action"
                     icon="fa-files-o"
                     name="%(action_ps_tc_current)d"
+                    attrs="{'invisible':[('use_scrum', '=', False)]}"
                 >
                     <field name="test_case_count" widget="statinfo" />
                 </button>
@@ -100,6 +101,7 @@
                     type="action"
                     icon="fa-files-o"
                     name="%(action_ps_meeting_current)d"
+                    attrs="{'invisible':[('use_scrum', '=', False)]}"
                 >
                     <field name="meeting_count" widget="statinfo" />
                 </button>
@@ -111,7 +113,7 @@
                 <attribute name="name">%(act_project_tasks)d</attribute>
             </xpath>
             <field name="partner_id" position="after">
-                <field name="manhours" />
+                <field name="manhours" attrs="{'invisible':[('use_scrum', '=', False)]}" />
             </field>
             <xpath expr="//page[@name='settings']" position="after">
                 <page name="description" string="Description">
@@ -125,8 +127,6 @@
         <field name="name">project.scrum.project.kanban</field>
         <field name="model">project.project</field>
         <field name="inherit_id" ref="project.view_project_kanban" />
-        <field name="mode">primary</field>
-        <field name="priority">99</field>
         <field name="arch" type="xml">
             <field name="task_count" position="before">
                 <field name="user_story_count" />

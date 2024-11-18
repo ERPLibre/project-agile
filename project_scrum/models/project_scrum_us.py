@@ -130,3 +130,12 @@ class ProjectScrumUs(models.Model):
             .name_get()
         )
         return sprints, None
+
+    def write(self, vals):
+        res = super(ProjectScrumUs, self).write(vals)
+        if "sprint_ids" in vals:
+            for rec in self:
+                for task_id in rec.task_ids:
+                    if task_id.sprint_id != rec.sprint_ids[0]:
+                        task_id.sprint_id = rec.sprint_ids[0].id if rec.sprint_ids[0] else False
+        return res
