@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="project_epic_1" model="project.scrum.epic">
+        <field name="name">Epic 1</field>
+        <field name="project_id" ref="project_scrum.project_project_1" />
+        <field name="description">Epic description Test</field>
+        <field name="sprint_ids" eval="[(4, ref('project_scrum.project_sprint_1'))]" />
+        <field name="task_ids" eval="[(4, ref('project_scrum.project_task_1'))]" />
+    </record>
+
+    <record id="project_epic_2" model="project.scrum.epic">
+        <field name="name">Epic 2</field>
+        <field name="project_id" ref="project_scrum.project_project_1" />
+        <field name="description">Epic Test</field>
+    </record>
+
+    <record id="project_epic_3" model="project.scrum.epic">
+        <field name="name">Epic 3</field>
+        <field name="project_id" ref="project_scrum.project_project_2" />
+        <field name="description">Long story Test</field>
+    </record>
+</odoo>

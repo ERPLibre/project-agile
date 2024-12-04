@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_ps_sprint_form" model="ir.ui.view">
+        <field name="name">project.scrum.sprint.form</field>
+        <field name="model">project.scrum.sprint</field>
+        <field name="inherit_id" ref="project_scrum.view_ps_sprint_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='us_ids']/.." position="after">
+                <page string="Epic">
+                    <field
+                        colspan="2"
+                        col="1"
+                        name="epic_ids"
+                        context="{
+                            'default_project_id': project_id,
+                            'default_sprint_id': id,
+                            }"
+                    >
+                        <tree>
+                            <field name="name" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
